@@ -1,14 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useEffect } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/message')
+      .then((response) => response.json())
+      .then((data) => {
+        setMessage(data.message)
+      })
+  })
 
   return (
     <>
       <h1>Hello Full Stack App Deployment</h1>
+      <h2>data: {message}</h2>
     </>
   )
 }
